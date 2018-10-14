@@ -1,5 +1,8 @@
 package com.apap.tugas1.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,16 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public PegawaiModel getPegawaiByNIP(String nip) {
 		return pegawaiDB.findBynip(nip);
+	}
+
+	@Override
+	public List<PegawaiModel> getPegawaiByTanggalLahirAndTahunMasuk(Date tanggalLahir, String tahunMasuk) {
+		return pegawaiDB.findByTanggalLahirAndTahunMasuk(tanggalLahir, tahunMasuk);
+	}
+
+	@Override
+	public void addPegawai(PegawaiModel pegawai) {
+		pegawaiDB.save(pegawai);
 	}
 
 }

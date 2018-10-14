@@ -1,11 +1,13 @@
 package com.apap.tugas1.repository;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.apap.tugas1.model.InstansiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 
 
 /**
@@ -15,5 +17,5 @@ import com.apap.tugas1.model.InstansiModel;
  */
 @Repository
 public interface InstansiDB extends JpaRepository<InstansiModel, BigInteger>{
-
+	List<InstansiModel> findByProvinsi(ProvinsiModel provinsi);
 }

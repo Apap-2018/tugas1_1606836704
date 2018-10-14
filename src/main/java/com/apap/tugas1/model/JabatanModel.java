@@ -1,6 +1,7 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,9 +24,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="jabatan")
 public class JabatanModel implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private BigInteger id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -40,15 +42,15 @@ public class JabatanModel implements Serializable {
 	@NotNull
 	@Column(name="gaji_pokok", nullable=false)
 	private double gajiPokok;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy="jabatan")
-	private List<PegawaiModel> pegawai;
+//	
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy="jabatan")
+//	private List<PegawaiModel> pegawai;
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
@@ -75,13 +77,13 @@ public class JabatanModel implements Serializable {
 	public void setGajiPokok(double gajiPokok) {
 		this.gajiPokok = gajiPokok;
 	}
-
-	public List<PegawaiModel> getPegawai() {
-		return pegawai;
-	}
-
-	public void setPegawai(List<PegawaiModel> pegawai) {
-		this.pegawai = pegawai;
-	}
+//
+//	public List<PegawaiModel> getPegawai() {
+//		return pegawai;
+//	}
+//
+//	public void setPegawai(List<PegawaiModel> pegawai) {
+//		this.pegawai = pegawai;
+//	}
 	
 }

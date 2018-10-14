@@ -1,7 +1,9 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,9 +35,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="pegawai")
 public class PegawaiModel implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private BigInteger id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -69,13 +72,13 @@ public class PegawaiModel implements Serializable {
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "jabatan_pegawai", joinColumns = {@JoinColumn(name = "id_pegawai")}, inverseJoinColumns = {@JoinColumn(name = "id_jabatan")})
-	private List<JabatanModel> jabatan;
+	private List<JabatanModel> jabatan = new ArrayList<JabatanModel>();
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 

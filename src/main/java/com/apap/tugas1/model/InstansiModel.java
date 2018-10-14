@@ -1,6 +1,7 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class InstansiModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private BigInteger id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -53,11 +54,11 @@ public class InstansiModel implements Serializable{
 	@JsonIgnore
 	private ProvinsiModel provinsi;
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
