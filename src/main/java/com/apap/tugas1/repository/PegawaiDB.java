@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.PegawaiModel;
 
 /**
@@ -15,5 +16,5 @@ import com.apap.tugas1.model.PegawaiModel;
  */
 public interface PegawaiDB extends JpaRepository<PegawaiModel, BigInteger>{
 	PegawaiModel findBynip(String nip);
-	List<PegawaiModel> findByTanggalLahirAndTahunMasuk(Date tanggalLahir, String tahunMasuk);
+	List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir, String tahunMasuk);
 }
