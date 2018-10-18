@@ -50,7 +50,7 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value = "/pegawai", method = RequestMethod.GET)
-	private String viewPilot(@RequestParam("nip") String nip, Model model) {
+	private String viewPegawai(@RequestParam("nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
 		double tunjangan = (pegawai.getInstansi().getProvinsi().getPresentaseTunjangan())/100;
 		double gajiTerbesar = 0;

@@ -1,6 +1,8 @@
 package com.apap.tugas1.controller;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas1.model.JabatanModel;
+import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.service.JabatanService;
 
 @Controller
@@ -34,12 +38,26 @@ public class JabatanController {
 		return "result";
 	}
 	
-
 	@RequestMapping(value = "/jabatan/view", method = RequestMethod.GET)
-	private String viewPilot(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
+	private String viewJabatan(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan).get();
 		model.addAttribute("jabatan", jabatan);
 		return "view-jabatan";
 	}
 	
+	@RequestMapping(value="/jabatan/ubah", method = RequestMethod.GET)
+	public String updatePegawai(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
+		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan).get();
+		model.addAttribute("jabatan", jabatan);
+	    return "update-jabatan";
+	}
+	
+	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
+	private String updatePegawaiSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
+		jabatanService.updateJabatan(jabatan);
+		
+		String msg = "Jabatan "+ jabatan.getNama() + " berhasil diubah";
+		model.addAttribute("message", msg);
+		return "result";
+	}
 }
