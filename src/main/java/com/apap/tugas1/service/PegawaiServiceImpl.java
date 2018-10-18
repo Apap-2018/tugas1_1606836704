@@ -2,12 +2,14 @@ package com.apap.tugas1.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.apap.tugas1.model.InstansiModel;
+import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.repository.PegawaiDB;
 /**
@@ -47,6 +49,11 @@ public class PegawaiServiceImpl implements PegawaiService{
 		updatePegawai.setInstansi(pegawai.getInstansi());
 		updatePegawai.setJabatan(pegawai.getJabatan());
 		pegawaiDB.save(updatePegawai);
+	}
+
+	@Override
+	public List<PegawaiModel> getPegawaiByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan) {
+		return pegawaiDB.findByInstansiAndJabatan(instansi, jabatan);
 	}
 
 }

@@ -1,8 +1,10 @@
 package com.apap.tugas1.controller;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -224,5 +226,33 @@ public class PegawaiController {
 		String msg = "Pegawai dengan NIP "+ newNip +" berhasil diubah";
 		model.addAttribute("message", msg);
 		return "result";
+	}
+	
+	@RequestMapping(value = "/pegawai/cari", method = RequestMethod.GET)
+	private String findPegawai(@RequestParam(value="idProvinsi", required = false) Optional<Integer> idProvinsi, 
+			@RequestParam(value="idInstansi", required = false) Optional<BigInteger> idInstansi, 
+			@RequestParam(value="idJabatan", required = false) Optional<BigInteger> idJabatan, 
+			Model model) {
+		List<ProvinsiModel> listProv = provinsiService.getProvinsi();
+		List<JabatanModel> listJabatan = jabatanService.getJabatan();
+		List<InstansiModel> listInstansi = instansiService.getInstansi();
+		
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("listProvinsi", listProv);
+		
+		InstansiModel instansi = idInstansi.isPresent() ? instansiService.getInstansiById(idInstansi.get()).get() : null;
+		
+		JabatanModel jabatan = idJabatan.isPresent() ? jabatanService.getJabatanById(idJabatan.get()).get() : null;
+		
+//		Optional<InstansiModel> instansi = instansiService.getInstansiById(idInstansi.get());
+//		
+//		Optional<JabatanModel> jabatan = jabatanService.getJabatanById(idJabatan.get());
+		
+		List<PegawaiModel> listPegawai = pegawaiService.getPegawaiByInstansiAndJabatan(instansi, jabatan);
+		for(PegawaiModel pegawai : listPegawai) {
+			System.out.println(pegawai.getNama());
+		}
+		return "find-pegawai";
 	}
 }

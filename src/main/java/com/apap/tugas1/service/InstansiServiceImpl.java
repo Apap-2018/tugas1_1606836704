@@ -1,6 +1,8 @@
 package com.apap.tugas1.service;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,11 @@ public class InstansiServiceImpl implements InstansiService{
 	@Override
 	public List<InstansiModel> getInstansiByProvinsi(ProvinsiModel provinsi) {
 		return instansiDB.findByProvinsi(provinsi);
+	}
+
+	@Override
+	public Optional<InstansiModel> getInstansiById(BigInteger id) {
+		return instansiDB.findById(id);
 	}
 
 }
