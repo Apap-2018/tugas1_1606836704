@@ -16,4 +16,5 @@ import com.apap.tugas1.model.JabatanModel;
  */
 @Repository
 public interface JabatanDB extends JpaRepository<JabatanModel, BigInteger> {
+	void deleteById(BigInteger id);
 }

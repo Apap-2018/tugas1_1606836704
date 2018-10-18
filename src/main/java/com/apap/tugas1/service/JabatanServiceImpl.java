@@ -40,4 +40,9 @@ public class JabatanServiceImpl implements JabatanService{
 		updateJabatan.setGajiPokok(jabatan.getGajiPokok());
 		jabatanDB.save(updateJabatan);
 	}
+
+	@Override
+	public void deleteJabatanById(BigInteger id) {
+		jabatanDB.deleteById(id);
+	}
 }
