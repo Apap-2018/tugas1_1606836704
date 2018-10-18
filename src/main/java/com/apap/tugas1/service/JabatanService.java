@@ -10,5 +10,6 @@ import com.apap.tugas1.model.JabatanModel;
  *
  */
 public interface JabatanService {
+	void addJabatan(JabatanModel jabatan);
 	List<JabatanModel> getJabatan(); 
 }

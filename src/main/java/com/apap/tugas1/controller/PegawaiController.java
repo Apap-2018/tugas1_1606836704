@@ -2,7 +2,6 @@ package com.apap.tugas1.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,7 +133,10 @@ public class PegawaiController {
 		pegawai.setNip(nip);
 		
 		pegawaiService.addPegawai(pegawai);
+		
+		String msg = "Pegawai dengan NIP "+ nip +" berhasil ditambahkan";
 		model.addAttribute("nip", nip);
+		model.addAttribute("message", msg);
 		return "add";
 	}
 	

@@ -20,4 +20,9 @@ public class JabatanServiceImpl implements JabatanService{
 		return jabatanDB.findAll();
 	}
 
+	@Override
+	public void addJabatan(JabatanModel jabatan) {
+		jabatanDB.save(jabatan);
+	}
+
 }
