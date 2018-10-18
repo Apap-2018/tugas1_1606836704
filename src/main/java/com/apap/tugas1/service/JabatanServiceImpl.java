@@ -1,6 +1,8 @@
 package com.apap.tugas1.service;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +27,8 @@ public class JabatanServiceImpl implements JabatanService{
 		jabatanDB.save(jabatan);
 	}
 
+	@Override
+	public Optional<JabatanModel> getJabatanById(BigInteger id) {
+		return jabatanDB.findById(id);
+	}
 }

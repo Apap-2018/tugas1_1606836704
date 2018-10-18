@@ -43,7 +43,9 @@ public class PegawaiController {
 	private JabatanService jabatanService;
 	
 	@RequestMapping("/")
-	private String home() {
+	private String home(Model model) {
+		List<JabatanModel> listJabatan = jabatanService.getJabatan();
+		model.addAttribute("listJabatan", listJabatan);
 		return "home";
 	}
 	
@@ -135,9 +137,8 @@ public class PegawaiController {
 		pegawaiService.addPegawai(pegawai);
 		
 		String msg = "Pegawai dengan NIP "+ nip +" berhasil ditambahkan";
-		model.addAttribute("nip", nip);
 		model.addAttribute("message", msg);
-		return "add";
+		return "result";
 	}
 	
 	@RequestMapping(value="/pegawai/ubah", method = RequestMethod.GET)
@@ -218,9 +219,10 @@ public class PegawaiController {
 		}
 		
 		
-		
 		pegawaiService.updatePegawai(oldNip, pegawai);
-		model.addAttribute("nip", newNip);
-		return "update";
+		
+		String msg = "Pegawai dengan NIP "+ newNip +" berhasil diubah";
+		model.addAttribute("message", msg);
+		return "result";
 	}
 }
