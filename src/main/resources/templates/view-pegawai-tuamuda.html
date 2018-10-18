@@ -47,7 +47,11 @@
       								<ul th:each="jabatan : ${youngest.jabatan}">
  										<li th:text="${jabatan.nama}"/>	
  									</ul>
- 									</td>	
+ 									</td>
+   								</tr>
+ 								<tr>
+      								<th>Gaji</th>
+      								<td th:text="'Rp.'+${gajiYoung}"></td>
    								</tr>
   							</tbody>
 						</table>
@@ -93,6 +97,10 @@
  										<li th:text="${jabatan.nama}"/>	
  									</ul>
  									</td>	
+   								</tr>
+   								<tr>
+      								<th>Gaji</th>
+      								<td th:text="'Rp.'+${gajiOld}"></td>
    								</tr>
   							</tbody>
 						</table>
