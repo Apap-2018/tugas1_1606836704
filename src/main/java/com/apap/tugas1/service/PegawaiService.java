@@ -18,4 +18,5 @@ public interface PegawaiService {
 	PegawaiModel getPegawaiByNIP(String nip);
 	List<PegawaiModel> getPegawaiByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir, String tahunMasuk);
 	List<PegawaiModel> getPegawaiByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan);
+	List<PegawaiModel> getPegawaiByInstansi(InstansiModel instansi);
 }

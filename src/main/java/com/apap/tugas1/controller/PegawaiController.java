@@ -48,21 +48,17 @@ public class PegawaiController {
 	private String home(Model model) {
 		List<JabatanModel> listJabatan = jabatanService.getJabatan();
 		model.addAttribute("listJabatan", listJabatan);
+		List<InstansiModel> listInstansi = instansiService.getInstansi();
+		model.addAttribute("listInstansi", listInstansi);
 		return "home";
 	}
 	
 	@RequestMapping(value = "/pegawai", method = RequestMethod.GET)
 	private String viewPegawai(@RequestParam("nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
-		double tunjangan = (pegawai.getInstansi().getProvinsi().getPresentaseTunjangan())/100;
-		double gajiTerbesar = 0;
-		for(JabatanModel jabatan : pegawai.getJabatan()) {
-			double gajiPokok = jabatan.getGajiPokok();
-			double gaji = gajiPokok + (tunjangan*gajiPokok);
-		
-			if(gaji > gajiTerbesar) gajiTerbesar = gaji;
-		}
-		model.addAttribute("gaji", (int)gajiTerbesar);
+		int gaji = (int) pegawai.getGaji();
+
+		model.addAttribute("gaji", gaji);
 		model.addAttribute("pegawai", pegawai);
 		return "view-pegawai";
 	}
@@ -255,4 +251,41 @@ public class PegawaiController {
 		}
 		return "find-pegawai";
 	}
+	
+	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
+	private String viewPegawaiTermudaTertua(@RequestParam("idInstansi") BigInteger idInstansi, Model model) {
+		InstansiModel instansi = instansiService.getInstansiById(idInstansi).get();
+		
+		List<PegawaiModel> listPegawai = pegawaiService.getPegawaiByInstansi(instansi);
+		System.out.println(listPegawai.size());
+		if(listPegawai.isEmpty()) {
+			model.addAttribute("message", "Instansi ini tidak memiliki pegawai");
+			return "error-nopegawai";
+		}
+		else if(listPegawai.size() == 1) {
+			model.addAttribute("message", "Instansi ini hanya memiliki 1 pegawai");
+			return "error-nopegawai";
+		}
+		else{
+		PegawaiModel pegawaiOldest = listPegawai.get(0);
+		PegawaiModel pegawaiYoungest = listPegawai.get(1);
+		
+		for(PegawaiModel pegawai : listPegawai) {
+			if(pegawai.getAge() > pegawaiOldest.getAge()) pegawaiOldest=pegawai;
+			else if(pegawai.getAge() < pegawaiYoungest.getAge()) pegawaiYoungest=pegawai;
+		} 
+		
+		int gajiOld = (int)pegawaiOldest.getGaji();
+		int gajiYoung = (int)pegawaiYoungest.getGaji();
+		
+		model.addAttribute("oldest", pegawaiOldest);
+		System.out.println(pegawaiOldest.getNama());
+		model.addAttribute("youngest", pegawaiYoungest);
+		
+		model.addAttribute("gajiOld", gajiOld);
+		model.addAttribute("gajiYoung", gajiYoung);
+		return "view-pegawai-tuamuda";
+		}
+	}
+	
 }

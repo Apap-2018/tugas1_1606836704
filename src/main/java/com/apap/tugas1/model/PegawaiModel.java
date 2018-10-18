@@ -3,6 +3,7 @@ package com.apap.tugas1.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,6 +137,25 @@ public class PegawaiModel implements Serializable {
 
 	public void setJabatan(List<JabatanModel> jabatan) {
 		this.jabatan = jabatan;
+	}
+	
+	public int getAge() {
+		LocalDate birthday = tanggalLahir.toLocalDate();
+		LocalDate now = LocalDate.now();
+		return now.getYear()-birthday.getYear();
+	}
+	
+	public double getGaji() {
+		double tunjangan = (instansi.getProvinsi().getPresentaseTunjangan())/100;
+		double gajiTerbesar = 0;
+		for(JabatanModel jabatan : jabatan) {
+			double gajiPokok = jabatan.getGajiPokok();
+		
+			if(gajiPokok > gajiTerbesar) gajiTerbesar = gajiPokok;
+		}
+
+		double gaji = gajiTerbesar + (tunjangan*gajiTerbesar);
+		return gaji;
 	}
 
 }
