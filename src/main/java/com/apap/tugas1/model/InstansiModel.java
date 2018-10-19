@@ -45,7 +45,7 @@ public class InstansiModel implements Serializable{
 	@Column(name = "deskripsi", nullable = false)
 	private String deskripsi;
 	
-	@OneToMany(mappedBy = "instansi", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "instansi", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<PegawaiModel> instansiPegawai;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

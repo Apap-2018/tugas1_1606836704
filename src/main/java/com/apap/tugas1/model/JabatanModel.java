@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,6 +46,17 @@ public class JabatanModel implements Serializable {
 //	
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy="jabatan")
 //	private List<PegawaiModel> pegawai;
+	
+//	@OneToMany(mappedBy = "jabatan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//	private List<JabatanPegawaiModel> pegawaiJabatan;
+
+//	public List<JabatanPegawaiModel> getPegawaiJabatan() {
+//		return pegawaiJabatan;
+//	}
+//
+//	public void setPegawaiJabatan(List<JabatanPegawaiModel> pegawaiJabatan) {
+//		this.pegawaiJabatan = pegawaiJabatan;
+//	}
 
 	public BigInteger getId() {
 		return id;

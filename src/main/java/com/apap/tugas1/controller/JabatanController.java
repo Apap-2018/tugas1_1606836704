@@ -2,6 +2,7 @@ package com.apap.tugas1.controller;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,15 @@ import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.service.JabatanService;
+import com.apap.tugas1.service.PegawaiService;
 
 @Controller
 public class JabatanController {
 	@Autowired
 	private JabatanService jabatanService;
+	
+	@Autowired
+	private PegawaiService pegawaiService;
 	
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.GET)
 	private String add(Model model) {
@@ -42,6 +47,12 @@ public class JabatanController {
 	@RequestMapping(value = "/jabatan/view", method = RequestMethod.GET)
 	private String viewJabatan(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan).get();
+		
+		List<PegawaiModel> pegawai = pegawaiService.getPegawaiByJabatan(jabatan);
+		int jlhPegawai = pegawai.size();
+		
+		model.addAttribute("jlhPegawai", jlhPegawai);
+		
 		model.addAttribute("jabatan", jabatan);
 		return "view-jabatan";
 	}
@@ -71,8 +82,8 @@ public class JabatanController {
 	
 	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
 	private String viewAllJabatan(Model model) {
-		List<JabatanModel> jabatan = jabatanService.getJabatan();
-		model.addAttribute("listJabatan", jabatan);
+		List<JabatanModel> listJabatan = jabatanService.getJabatan();
+		model.addAttribute("listJabatan", listJabatan);
 		return "view-all-jabatan";
 	}
 
