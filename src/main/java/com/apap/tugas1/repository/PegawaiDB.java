@@ -23,4 +23,5 @@ public interface PegawaiDB extends JpaRepository<PegawaiModel, BigInteger>{
 	List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir, String tahunMasuk);
 	List<PegawaiModel> findByInstansiAndJabatan(@Nullable InstansiModel instansi, @Nullable JabatanModel jabatan);
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
+	List<PegawaiModel> findByJabatan(JabatanModel jabatan);
 }

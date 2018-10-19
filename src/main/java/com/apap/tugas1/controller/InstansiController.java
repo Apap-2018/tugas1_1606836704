@@ -25,7 +25,7 @@ public class InstansiController {
 	@Autowired
 	private InstansiService instansiService;
 	
-	@RequestMapping(value = "/instansi/getByProvinsi", method = RequestMethod.GET)
+	@RequestMapping(value = "/instansi/getInstansiByProvinsi", method = RequestMethod.GET)
 	@ResponseBody
 	public List<InstansiModel> getInstansi(@RequestParam (value = "idProvinsi", required = true) int idProvinsi) {
 		ProvinsiModel provinsi = provinsiService.getProvinsiById(idProvinsi);

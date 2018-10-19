@@ -49,7 +49,7 @@ public class InstansiModel implements Serializable{
 	private List<PegawaiModel> instansiPegawai;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "provinsi_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "id_provinsi", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private ProvinsiModel provinsi;

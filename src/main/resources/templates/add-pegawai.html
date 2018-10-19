@@ -88,17 +88,16 @@
 	$('#provinsi').change(
 	     function() {
 	    	 console.log($(this).val());
-	         $.getJSON("/instansi/getByProvinsi", {
-	             idProvinsi : $(this).val(),
+	    	 value = $(this).val();
+	         $.getJSON("/instansi/getInstansiByProvinsi", {
+	             idProvinsi : value,
 	             ajax : 'true'
 	         }, function(data) {
 	             var html = '';
-	             var len = data.length;
-	             for ( var i = 0; i < len; i++) {
-	                 html += '<option value="' + data[i].id + '">'
-	                         + data[i].nama + '</option>';
+	             var size = data.length;
+	             for ( var i = 0; i < size; i++) {
+	                 html += '<option value="' + data[i].id + '">' + data[i].nama + '</option>';
 	             }
-	             html += '</option>';
 	             $('#instansi').html(html);
 	         });
 	     });

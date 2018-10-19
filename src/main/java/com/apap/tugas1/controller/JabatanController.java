@@ -47,14 +47,14 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value="/jabatan/ubah", method = RequestMethod.GET)
-	public String updatePegawai(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
+	public String updateJabatan(@RequestParam("idJabatan") BigInteger idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan).get();
 		model.addAttribute("jabatan", jabatan);
 	    return "update-jabatan";
 	}
 	
 	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
-	private String updatePegawaiSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
+	private String updateJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.updateJabatan(jabatan);
 		
 		String msg = "Jabatan "+ jabatan.getNama() + " berhasil diubah";
@@ -63,7 +63,7 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value = "/jabatan/hapus", method = RequestMethod.POST)
-	private String deletePilot(@ModelAttribute JabatanModel jabatan, Model model) {
+	private String deleteJabatan(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.deleteJabatanById(jabatan.getId());
 		model.addAttribute("message", "hapus");
 		return "result";
