@@ -91,7 +91,8 @@ public class PegawaiController {
 		model.addAttribute("listJabatan", listJabatan);
 		model.addAttribute("listProvinsi", listProv);
 		
-		
+		List<InstansiModel> listInstansi = instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi());
+		model.addAttribute("listInstansi", listInstansi);
 		pegawai.getJabatan().add(new JabatanModel());
 	    model.addAttribute("pegawai", pegawai);
 	    return "add-pegawai";
@@ -105,6 +106,10 @@ public class PegawaiController {
 		
 		model.addAttribute("listJabatan", listJabatan);
 		model.addAttribute("listProvinsi", listProv);
+		
+
+		List<InstansiModel> listInstansi = instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi());
+		model.addAttribute("listInstansi", listInstansi);
 		
 		Integer rowId = Integer.valueOf(req.getParameter("deleteRow"));
 		System.out.println(rowId);
@@ -149,6 +154,9 @@ public class PegawaiController {
 		model.addAttribute("listProvinsi", listProv);
 		
 		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
+
+		List<InstansiModel> listInstansi = instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi());
+		model.addAttribute("listInstansi", listInstansi);
 		
 	    model.addAttribute("pegawai", pegawai);
 	    return "update-pegawai";
@@ -162,6 +170,12 @@ public class PegawaiController {
 		
 		model.addAttribute("listJabatan", listJabatan);
 		model.addAttribute("listProvinsi", listProv);
+		
+		List<InstansiModel> listInstansi = instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi());
+		model.addAttribute("listInstansi", listInstansi);
+		
+		ProvinsiModel provinsi = pegawai.getInstansi().getProvinsi();
+		model.addAttribute("selectedItem", provinsi);
 		
 		
 		pegawai.getJabatan().add(new JabatanModel());
@@ -177,6 +191,9 @@ public class PegawaiController {
 		
 		model.addAttribute("listJabatan", listJabatan);
 		model.addAttribute("listProvinsi", listProv);
+		
+		List<InstansiModel> listInstansi = instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi());
+		model.addAttribute("listInstansi", listInstansi);
 		
 		Integer rowId = Integer.valueOf(req.getParameter("deleteRow"));
 		pegawai.getJabatan().remove(rowId.intValue());
@@ -209,7 +226,6 @@ public class PegawaiController {
 			
 			newNip = kode + tanggalLahir + tahunKerja + strUrutan;
 			pegawai.setNip(newNip);
-			System.out.println(newNip);
 		}
 		else {
 			 newNip = oldNip;
@@ -275,10 +291,7 @@ public class PegawaiController {
 				pegawai = pegawaiService.getPegawaiByJabatan(jabatan);
 			}
 		}
-		for(PegawaiModel opegawai : pegawai) {
-			System.out.println(opegawai.getTempatLahir());
-			System.out.println(opegawai.getJabatan());
-		}
+		
 		model.addAttribute("listPegawai", pegawai);
 		return "find-pegawai";
 	}
@@ -288,7 +301,6 @@ public class PegawaiController {
 		InstansiModel instansi = instansiService.getInstansiById(idInstansi).get();
 		
 		List<PegawaiModel> listPegawai = pegawaiService.getPegawaiByInstansi(instansi);
-		System.out.println(listPegawai.size());
 		if(listPegawai.isEmpty()) {
 			model.addAttribute("message", "Instansi ini tidak memiliki pegawai");
 			return "error-nopegawai";
@@ -310,7 +322,6 @@ public class PegawaiController {
 		int gajiYoung = (int)pegawaiYoungest.getGaji();
 		
 		model.addAttribute("oldest", pegawaiOldest);
-		System.out.println(pegawaiOldest.getNama());
 		model.addAttribute("youngest", pegawaiYoungest);
 		
 		model.addAttribute("gajiOld", gajiOld);

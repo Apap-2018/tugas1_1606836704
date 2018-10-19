@@ -1,5 +1,5 @@
 <head>
-	<title>Add</title>
+	<title>Delete Jabatan</title>
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>	
@@ -9,7 +9,7 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
 	<div style="text-align:center; padding-top: 25px;">
-		<h1>Sukses!!</h1><br>
+		<h1 th:text="${messageHeader}">Sukses!!</h1><br>
 		<h3 th:text="${message}"></h3>
 	</div>
 </body>

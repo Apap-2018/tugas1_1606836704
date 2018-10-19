@@ -1,5 +1,5 @@
 <head>
-	<title>Home</title>
+	<title>Update Pegawai</title>
 	
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>	
@@ -34,6 +34,7 @@
     						<input type="number" class="form-control" name="tahunMasuk" th:value="*{tahunMasuk}" aria-describedby="emailHelp" required="required" placeholder="Enter tahun masuk">
   							</div>
   							<div class="form-group">
+  				
   							<label for="provinsi">Provinsi</label>
 							<span th:if="*{instansi} == null">
 								<select  class="form-control" required="required" name="provinsi" id="provinsi" th:value="${listProvinsi}">
@@ -42,9 +43,11 @@
 							</span>
 							<span th:unless="*{instansi} == null">
 								<select  class="form-control" required="required" name="provinsi" id="provinsi" th:value="*{instansi.provinsi}">
-						      		<option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" th:selected="*{instansi.provinsi.id}"></option>
+									<option  th:value="*{instansi.provinsi.id}" selected="selected" th:text="*{instansi.provinsi.nama}"></option>
+			                    	<option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" ></option>
 						    	</select>
 							</span>
+					
   							<!--<select class="custom-select" name="provinsi" id="provinsi" th:value="*{instansi.provinsi}" required="required">
    	 							<option th:each="prov : ${listProvinsi}" th:value="${prov.id}" th:text="${prov.nama}">
     							</option>
@@ -89,7 +92,7 @@
 	$('#provinsi').change(
 	     function() {
 	    	 console.log($(this).val());
-	         $.getJSON("/instansi/getByProvinsi", {
+	         $.getJSON("/instansi/getInstansiByProvinsi", {
 	             idProvinsi : $(this).val(),
 	             ajax : 'true'
 	         }, function(data) {
