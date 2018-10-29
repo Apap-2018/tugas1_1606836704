@@ -276,14 +276,14 @@ public class PegawaiController {
 					
 					for(InstansiModel instansi : listInstansi) {
 						pegawaiTemp = pegawaiService.getPegawaiByInstansiAndJabatan(instansi, jabatan);
+						pegawai.addAll(pegawaiTemp);
 					}
-					pegawai = pegawaiTemp;
 					
 				}else {
 					for(InstansiModel instansi : listInstansi) {
 						pegawaiTemp = pegawaiService.getPegawaiByInstansi(instansi);
+						pegawai.addAll(pegawaiTemp);
 					}
-					pegawai = pegawaiTemp;
 				}
 			}else if(idJabatan.isPresent()){
 				JabatanModel jabatan = jabatanService.getJabatanById(idJabatan.get()).get();
